@@ -1,14 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Tabs from '../navigation/tabs';
+
+// const App = () => {
+  
+//   return (
+//     <NavigationContainer>
+//       <Tabs />
+//     </NavigationContainer>
+//   );
+// }
+
+// export default App;
+
+// export default function App() {
+//    return (
+//        <View style={styles.container}>
+//          <StatusBar style="auto" />
+//        </View>
+//    );
+// }
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>What if I change this name?</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tabs /> 
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
