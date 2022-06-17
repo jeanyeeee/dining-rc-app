@@ -1,17 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 
-const HomeScreen  = ({navigation}) => {
+const ProfileScreen  = ({navigation}) => {
     return(
         <View style= {styles.container}>
-            <Text>Homescreen Page</Text> 
+            <Text>Profile Page</Text> 
 
         </View>
     )
 }
 
-export default HomeScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

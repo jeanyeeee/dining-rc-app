@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 
 const CartScreen  = ({navigation}) => {
     return(
         <View style= {styles.container}>
-            <Text onPress={() => navigation.navigate('Home')}>Cart Page, Press To Go Home</Text>
+            <Text>Cart Page</Text>
         </View>
     )
 }
