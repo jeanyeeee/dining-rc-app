@@ -9,8 +9,14 @@ const Stack = createNativeStackNavigator();
 export default function HomeScreen() {
   //Create the Button
   const [dish, setDish] = useState(true)
+  //change to listen to person user name after
+  const user = "You"
   return(
     <View style= {styles.container}>
+      {/* Header Buttons - Hello, <User> and Image */}
+      <View>
+        <Text style= {styles.text}>Hello, {user}</Text> 
+      </View>
       {/* Header Buttons -  Popular Dishes, All Stalls */}
       <View style= {styles.buttonArrangement}>
         {/* Header Buttons -  Popular Dishes */}
@@ -24,11 +30,9 @@ export default function HomeScreen() {
             <Text style={styles.textAlt}>Popular Dishes</Text>
           </View>
     </TouchableOpacity>
+
     {/* Header Buttons -  All Stalls */}
-    <TouchableOpacity 
-    onPress = {() => {
-      setDish(false)
-    }}>
+    <TouchableOpacity onPress = {() => {setDish(false)}}>
         <View style = {{...styles.rightButton,
           backgroundColor: !dish ? "#DFE2E5" : "#FCFCFC",
           }}>
@@ -50,9 +54,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FCFCFC",
-    alignItems: 'center',
-    justifyContent: 'center',
-
+  },
+  text : {
+    color: "#3D3D3D",
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "left",
+    paddingHorizontal: 55,
+    paddingTop: 30,
   },
   textAlt: {
     color: "#0B735F",
@@ -71,8 +80,10 @@ const styles = StyleSheet.create({
 
   buttonArrangement:  {
     backgroundColor: "#FCFCFC",
-    marginTop: 30, 
+    marginTop: 20, 
     flexDirection: 'row', 
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
