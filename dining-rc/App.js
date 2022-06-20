@@ -9,6 +9,7 @@ const App = () => {
     <NavigationContainer>
           <BottomTab />
           <View style= {styles.container}>
+
           </View>
       </NavigationContainer>
 

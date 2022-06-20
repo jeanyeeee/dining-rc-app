@@ -1,10 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { doc, getFirestore, collection, getDocs , getDoc} from 'firebase/firestore';
 const Stack = createNativeStackNavigator();
+import { db } from '../../firebase';
 
+
+
+//Get data from the fire base
+const GetData = async () => {
+    const foodCollection = collection(db, "DiningFood");
+    const foodSnapshot = await getDocs(foodCollection);
+    const foodList = foodSnapshot.docs.map(doc => doc.data());
+    return foodList;
+  }
 //MAIN: HomeScreen
 export default function HomeScreen() {
   //Create the Button
@@ -40,9 +50,11 @@ export default function HomeScreen() {
           </View>
     </TouchableOpacity>
       </View>
-        {/* Content */}
+        {/*View food*/}
       <ScrollView>
-
+          <Button title="Get Data" onPress={GetData} />
+          <View>
+          </View>
       </ScrollView>
       </View>
 
