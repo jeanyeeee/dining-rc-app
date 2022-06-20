@@ -3,7 +3,7 @@ import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'fi
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
-
+//TODO: Need to include ratings too
 const GetData = () => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood");

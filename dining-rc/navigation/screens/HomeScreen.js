@@ -5,7 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { doc, getFirestore, collection, getDocs , getDoc} from 'firebase/firestore';
 const Stack = createNativeStackNavigator();
 import { db } from '../../firebase';
-import GetData from '../../api/FoodApi';
+import GetData from '../../api/PopularDish';
+import GetStalls from '../../api/AllStalls';
 
 
 //MAIN: HomeScreen
@@ -43,11 +44,8 @@ export default function HomeScreen() {
           </View>
     </TouchableOpacity>
       </View>
-        {/*View food*/}
-          {/*Trying using List*/}
-      <GetData />
-
-
+      {/*For Tabs*/}
+      {dish? <GetData /> : <Text/>}
       </View>
 
   ); 
