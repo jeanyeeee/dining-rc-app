@@ -5,16 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { doc, getFirestore, collection, getDocs , getDoc} from 'firebase/firestore';
 const Stack = createNativeStackNavigator();
 import { db } from '../../firebase';
+import GetData from '../../api/FoodApi';
 
 
-
-//Get data from the fire base
-const GetData = async () => {
-    const foodCollection = collection(db, "DiningFood");
-    const foodSnapshot = await getDocs(foodCollection);
-    const foodList = foodSnapshot.docs.map(doc => doc.data());
-    return foodList;
-  }
 //MAIN: HomeScreen
 export default function HomeScreen() {
   //Create the Button
@@ -39,7 +32,7 @@ export default function HomeScreen() {
           }}>
             <Text style={styles.textAlt}>Popular Dishes</Text>
           </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
 
     {/* Header Buttons -  All Stalls */}
     <TouchableOpacity onPress = {() => {setDish(false)}}>
@@ -51,11 +44,10 @@ export default function HomeScreen() {
     </TouchableOpacity>
       </View>
         {/*View food*/}
-      <ScrollView>
-          <Button title="Get Data" onPress={GetData} />
-          <View>
-          </View>
-      </ScrollView>
+          {/*Trying using List*/}
+      <GetData />
+
+
       </View>
 
   ); 
