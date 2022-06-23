@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
+import GetRating from '../../api/DisplayRating';
 
 const DishScreen  = ({navigation}) => {
   return(
     <View style= {styles.container}>
       <Text>Dish Screen</Text>
+      <GetRating />
     </View>
   ); 
 }

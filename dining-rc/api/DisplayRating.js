@@ -3,49 +3,47 @@ import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'fi
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import GetRating from './DisplayRating';
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetData = () => {
-    const [food, setFood] = useState([]);
-    const foodColl = collection(db, "DiningFood");
-
+const GetRating = (foodID) => {
+    const [rating, setRating] = useState([]);
+    const ratingColl = collection(db, "StudentRating");
+    const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
     useEffect(() => {
         async function fetchData() {
-            const foodSnapshot = await getDocs(foodColl);
-            const foods = [];
+            const ratingSnapshot = await getDocs(qRating);
+            const ratings = [];
             //for each food in the list
-            const foodList = foodSnapshot.docs.map(doc => {
+            const ratingList = ratingSnapshot.docs.map(doc => {
                //console.log("Data is", doc.data())
                const obj = doc.data(); //Refers to 1 food item
-               foods.push({
+               ratings.push({
                 id: doc.id, //Random generated
                 info: obj //Other information relating to the food
                })
                })
-        //console.log(foods);
-        setFood(foods)
+        //console.log(ratings);
+        setRating(ratings);
     }
     fetchData();
 }, [])    
 
-//onPress navigation feature to be added after static pages have been fully created
     return(
         <FlatList 
         style= {{height: '100%'}}
-        data = {food}
+        data = {rating}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} onPress={() => {alert("Navigation feature not added yet!")}}>
+            <Pressable style = {styles.pressable} >
                 <View style = {styles.inner}>
-                    <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
-                    <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
+                    <Text style= {styles.heading}>{item["info"]["Food ID"]}</Text>
+                    <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
             </Pressable> 
         )} />
     )
 }
-export default GetData;
+export default GetRating;
 
 const styles = StyleSheet.create({
     container: {
