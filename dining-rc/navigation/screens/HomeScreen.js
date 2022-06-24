@@ -45,7 +45,7 @@ export default function HomeScreen() {
     </TouchableOpacity>
       </View>
       {/*For Tabs*/}
-      {dish? <GetData /> : <Text/>}
+      {dish? <GetData /> : <GetStalls/>}
       </View>
 
   ); 

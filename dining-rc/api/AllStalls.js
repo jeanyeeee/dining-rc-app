@@ -2,7 +2,7 @@ import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'fi
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
-
+import GetImage from '../ui/ImagePicker';
 //TODO: Keep as follows, need to group by stall name in flatlist
 
 const GetStalls = () => {
@@ -23,6 +23,7 @@ const GetStalls = () => {
                })
                })
         //console.log(foods);
+        sortingArray(foods);
         setFood(foods)
     }
     fetchData();
@@ -36,14 +37,24 @@ const GetStalls = () => {
         renderItem = {({item}) => (
             <Pressable style = {styles.pressable}>
                 <View style = {styles.inner}>
+                <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
+                <View style = {styles.innerText}>
                     <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                     <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text> 
+                </View>
                 </View> 
             </Pressable> 
         )} />
     )
 }
 export default GetStalls;
+
+const sortingArray = (array) => {
+    array.sort((a,b) => {
+        return a["info"]["Stall ID"] - b["info"]["Stall ID"];
+    });
+    return(array)
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -54,17 +65,25 @@ const styles = StyleSheet.create({
         backgroundColor: "#DFE2E5",
         padding: 15,
         borderRadius: 15,
-        margin: 10,
-        marginHorizontal: 10,
+        margin: 15,
+        marginHorizontal: 20
     },
     inner: {
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "row"
     },
     heading: {
         fontWeight: "bold"
     },
     itemText: {
-        fontWeight: "300"
+        fontWeight: "300",
+        width: 250,
+    },
+    image: {
+        justifyContent: 'center',
+    },
+    innerText: {
+        flexDirection: "column",
+        marginLeft: 20, 
     }
 })
