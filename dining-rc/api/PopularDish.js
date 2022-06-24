@@ -40,8 +40,11 @@ const GetData = () => {
             <Pressable style = {styles.pressable} onPress={() => {alert("Navigation feature not added yet!")}}>
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
-                    <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
-                    <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
+                    <View style = {styles.innerText}>
+                        <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
+                        <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
+                    </View>
+                    
                     </View> 
             </Pressable> 
         )} />
@@ -63,15 +66,20 @@ const styles = StyleSheet.create({
     },
     inner: {
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "row"
     },
     heading: {
         fontWeight: "bold"
     },
     itemText: {
-        fontWeight: "300"
+        fontWeight: "300",
+        width: 250,
     },
     image: {
         justifyContent: 'center',
+    },
+    innerText: {
+        flexDirection: "column",
+        marginLeft: 20, 
     }
 })

@@ -31,8 +31,8 @@ export default GetImage;
 
 const styles = StyleSheet.create({
     image: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 70,
+        height: 70,
+        borderRadius: 35,
     },
 })
