@@ -4,6 +4,7 @@ import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetRating from './DisplayRating';
+import GetImage from '../ui/ImagePicker';
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
 const GetData = () => {
@@ -38,6 +39,7 @@ const GetData = () => {
         renderItem = {({item}) => (
             <Pressable style = {styles.pressable} onPress={() => {alert("Navigation feature not added yet!")}}>
                 <View style = {styles.inner}>
+                    <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                     <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     </View> 
@@ -68,5 +70,8 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontWeight: "300"
+    },
+    image: {
+        justifyContent: 'center',
     }
 })
