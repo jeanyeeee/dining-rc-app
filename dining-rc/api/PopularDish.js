@@ -37,7 +37,7 @@ const GetData = () => {
         data = {food}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} onPress={() => {alert("Navigation feature not added yet!")}}>
+            <Pressable style = {styles.pressable}>
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>

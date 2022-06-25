@@ -6,7 +6,7 @@ const DishScreen  = ({navigation}) => {
   return(
     <View style= {styles.container}>
       <Text>Dish Screen</Text>
-      <GetRating />
+      <GetRating id = {1} />
     </View>
   ); 
 }

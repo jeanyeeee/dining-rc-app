@@ -6,9 +6,10 @@ import React, {useState, useEffect} from 'react';
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
 const GetRating = (foodID) => {
+
     const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
-    const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
+    const qRating = query(ratingColl, where("Food ID", "==", foodID.id)) //Will change to the foodID
     useEffect(() => {
         async function fetchData() {
             const ratingSnapshot = await getDocs(qRating);
