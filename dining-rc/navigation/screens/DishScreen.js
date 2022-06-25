@@ -2,12 +2,14 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import GetRating from '../../api/DisplayRating';
 
-const DishScreen  = ({navigation}) => {
+const DishScreen  = ({route, navigation}) => {
+  const foodId = route.params;
   return(
     <View style= {styles.container}>
       <Text>Dish Screen</Text>
-      <GetRating />
-    </View>
+      <Text>HaHa look!</Text>
+      <GetRating foodID = {foodId.foodId}/>
+    </View> 
   ); 
 }
 

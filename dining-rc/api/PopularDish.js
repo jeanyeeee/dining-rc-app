@@ -5,6 +5,8 @@ import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetRating from './DisplayRating';
 import GetImage from '../ui/ImagePicker';
+import * as RootNavigation from '../navigation/RootNavigation';
+
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
 const GetData = () => {
@@ -30,17 +32,18 @@ const GetData = () => {
     fetchData();
 }, [])    
 
-//onPress navigation feature to be added after static pages have been fully created
+//onPress navigation feature to be added after static pages have been fully created 
     return(
         <FlatList 
         style= {{height: '100%'}}
         data = {food}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} onPress={() => {alert("Navigation feature not added yet!")}}>
+            <Pressable style = {styles.pressable} onPress={() => {RootNavigation.navigate('Dish', {foodId: item["info"]["Food ID"]})}}>
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>
+                        <Text style= {styles.heading}>{item["info"]["Food ID"]}</Text>
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     </View>

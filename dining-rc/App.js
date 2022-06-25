@@ -3,10 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import BottomTab from './navigation/tabs';
 import {View, StyleSheet} from 'react-native';
 import GetData from './api/PopularDish';
+import { navigationRef } from './navigation/RootNavigation';
 
 const App = () => {
   return(
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
           <BottomTab />
           <View style= {styles.container}>
           </View>

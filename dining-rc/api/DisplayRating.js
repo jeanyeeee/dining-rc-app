@@ -3,9 +3,10 @@ import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'fi
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
+
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetRating = (foodID) => {
+const GetRating = ({foodID}) => {
     const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
     const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
