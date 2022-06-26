@@ -39,11 +39,15 @@ const GetData = () => {
         data = {food}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} onPress={() => {RootNavigation.navigate('Dish', {foodId: item["info"]["Food ID"]})}}>
+            <Pressable style = {styles.pressable} onPress={() => 
+                {RootNavigation.navigate('Dish', 
+            {foodID: item["info"]["Food ID"], 
+            foodName: item["info"]["Food Name"],
+            foodImage: item["info"]["Image"],
+            })}}>
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>
-                        
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     </View>
@@ -80,6 +84,9 @@ const styles = StyleSheet.create({
     },
     image: {
         justifyContent: 'center',
+        width: 70,
+        height: 70,
+        borderRadius: 35,
     },
     innerText: {
         flexDirection: "column",

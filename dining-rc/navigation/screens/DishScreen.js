@@ -11,13 +11,12 @@ const DishScreen  = ({route, navigation}) => {
   //   return focusHandler;
   // }, [navigation]);
 
-  const foodId = route.params;
+  const food = route.params;
   return(
     <View style= {styles.container}>
-      {foodId? <GetRating foodID = {foodId.foodId}/> : <GetAllRating />}
+      {food? <GetRating foodID = {food.foodID} foodName = {food.foodName} foodImage= {food.foodImage} /> : <GetAllRating />}
     </View> 
-  ); 
-}
+  );}
 
 
 

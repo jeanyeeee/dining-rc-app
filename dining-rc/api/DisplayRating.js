@@ -3,10 +3,10 @@ import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'fi
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
-
+import GetSingleImage from '../ui/SingleImagePicker';
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetRating = ({foodID}) => {
+const GetRating = ({foodID, foodName, foodImage}) => {
     const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
     const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
@@ -28,28 +28,41 @@ const GetRating = ({foodID}) => {
     }
     fetchData();
 }, [])    
-
     return(
-        <FlatList 
-        style= {{height: '100%'}}
-        data = {rating}
-        numColumns = {1}
-        renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} >
-                <View style = {styles.inner}>
-                    <Text style= {styles.heading}>{item["info"]["Food ID"]}</Text>
-                    <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
-                    </View> 
-            </Pressable> 
-        )} />
+        <View style = {styles.container}>
+            <View style= {styles.image}>
+            <GetSingleImage name = {foodImage} />
+            <Text style = {styles.heading}>{foodName}</Text> 
+            </View>
+                <View>
+                    <FlatList 
+                        style= {{height: '100%'}}
+                        data = {rating}
+                        numColumns = {1}
+                        renderItem = {({item}) => (
+                        <View>
+                            <Pressable style = {styles.pressable} >
+                                <View style = {styles.inner}>
+                                    <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
+                                </View> 
+                            </Pressable> 
+                        </View>
+                    
+                )} />
+                </View>
+            </View>
     )
 }
 export default GetRating;
 
 const styles = StyleSheet.create({
+    image: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
     container: {
         flex: 1,
-        marginTop: 100,
+        marginTop: 50,
     },
     pressable: {
         backgroundColor: "#DFE2E5",
@@ -63,7 +76,11 @@ const styles = StyleSheet.create({
         flexDirection: "column"
     },
     heading: {
-        fontWeight: "bold"
+        paddingTop: 20,
+        fontSize: 20,
+        fontWeight: "bold",
+        alignItems: "center",
+
     },
     itemText: {
         fontWeight: "300"
