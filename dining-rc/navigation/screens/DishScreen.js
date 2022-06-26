@@ -1,17 +1,25 @@
-import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, Button, StyleSheet, Alert} from 'react-native';
 import GetRating from '../../api/DisplayRating';
-
+import GetAllRating from '../../api/AllRating';
 const DishScreen  = ({route, navigation}) => {
+  //check if your page is refreshed
+  // useEffect(() => {
+  //   const focusHandler = navigation.addListener('focus', () => {
+  //     Alert.alert("Page Refreshed");
+  //   })
+  //   return focusHandler;
+  // }, [navigation]);
+
   const foodId = route.params;
   return(
     <View style= {styles.container}>
-      <Text>Dish Screen</Text>
-      <Text>HaHa look!</Text>
-      <GetRating foodID = {foodId.foodId}/>
+      {foodId? <GetRating foodID = {foodId.foodId}/> : <GetAllRating />}
     </View> 
   ); 
 }
+
+
 
 export default DishScreen;
 

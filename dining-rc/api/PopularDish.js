@@ -43,7 +43,7 @@ const GetData = () => {
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>
-                        <Text style= {styles.heading}>{item["info"]["Food ID"]}</Text>
+                        
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     </View>

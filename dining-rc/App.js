@@ -2,9 +2,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import BottomTab from './navigation/tabs';
 import {View, StyleSheet} from 'react-native';
-import GetData from './api/PopularDish';
 import { navigationRef } from './navigation/RootNavigation';
-
+import {createStackNavigator} from '@react-navigation/stack';
 const App = () => {
   return(
     <NavigationContainer ref={navigationRef}>
@@ -12,8 +11,6 @@ const App = () => {
           <View style= {styles.container}>
           </View>
       </NavigationContainer>
-
-
   );
 }
 

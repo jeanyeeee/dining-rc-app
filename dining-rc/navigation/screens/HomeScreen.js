@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button, Alert} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { doc, getFirestore, collection, getDocs , getDoc} from 'firebase/firestore';
@@ -10,7 +10,16 @@ import GetStalls from '../../api/AllStalls';
 
 
 //MAIN: HomeScreen
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
+  //Navigation
+  useEffect(() => {
+    const focusHandler = navigation.addListener('focus', () => {
+      Alert.alert("Page refreshed");
+    })
+    return focusHandler;
+  }, [navigation]);
+
+
   //Create the Button
   const [dish, setDish] = useState(true)
   //change to listen to person user name after
