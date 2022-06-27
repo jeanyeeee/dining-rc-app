@@ -15,7 +15,7 @@ const GetSingleImage = (props) => {
             await getDownloadURL(storageRef).then((ref) => {setUrl(ref)});
 
         }
-        if (url ==  undefined) {func()};
+        func();
     }, []);
 
     return(

@@ -3,6 +3,7 @@ import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetImage from '../ui/ImagePicker';
+import GetAveRating from '../ui/GetAveRating';
 //TODO: Keep as follows, need to group by stall name in flatlist
 
 const GetStalls = () => {
@@ -40,7 +41,7 @@ const GetStalls = () => {
                 <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                 <View style = {styles.innerText}>
                     <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
-                    <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text> 
+                    <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                 </View>
                 </View> 
             </Pressable> 

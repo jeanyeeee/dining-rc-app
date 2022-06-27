@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import DishScreen from './screens/DishScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import * as RootNavigation from '../navigation/RootNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,9 +19,8 @@ const BottomTab = () => {
       tabBarIcon: ({ focused, color}) => {
         let iconName;
         if (route.name === 'Home') {
-          iconName = focused
-            ? 'home'
-            : 'home-outline';
+          iconName = focused ? 'home': 'home-outline';
+        
         } else if (route.name === 'Cart') {
           iconName = focused ? 
           'cart' : 
@@ -35,19 +35,22 @@ const BottomTab = () => {
           'person-outline';
         }
         // You can return any component that you like here!
-        return <Ionicons name={iconName} size={30} color={color} />;
+        return <Ionicons name={iconName} size={30} color={color} 
+        onPress = {() => RootNavigation.navigate(route.name)}/>;
       },
       tabBarActiveTintColor: 'green',
       tabBarInactiveTintColor: 'black',
     })}
   >
-      <Tab.Screen name="Home" component={HomeScreen}/>
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Dish" component={DishScreen}></Tab.Screen>
       <Tab.Screen name="Cart" component={CartScreen}></Tab.Screen>
       <Tab.Screen name="Profile" component={ProfileScreen}></Tab.Screen>
     </Tab.Navigator>
   );
 }
+
+
 
 export default BottomTab;
 

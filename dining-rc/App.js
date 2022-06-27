@@ -4,6 +4,8 @@ import BottomTab from './navigation/tabs';
 import {View, StyleSheet} from 'react-native';
 import { navigationRef } from './navigation/RootNavigation';
 import {createStackNavigator} from '@react-navigation/stack';
+
+
 const App = () => {
   return(
     <NavigationContainer ref={navigationRef}>

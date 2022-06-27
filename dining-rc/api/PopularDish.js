@@ -6,10 +6,11 @@ import React, {useState, useEffect} from 'react';
 import GetRating from './DisplayRating';
 import GetImage from '../ui/ImagePicker';
 import * as RootNavigation from '../navigation/RootNavigation';
+import GetAveRating from '../ui/GetAveRating';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetData = () => {
+const GetData = (navigation) => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood");
 
@@ -39,8 +40,8 @@ const GetData = () => {
         data = {food}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} onPress={() => 
-                {RootNavigation.navigate('Dish', 
+            <Pressable style = {styles.pressable} 
+            onPress={() => {RootNavigation.navigate('Dish', 
             {foodID: item["info"]["Food ID"], 
             foodName: item["info"]["Food Name"],
             foodImage: item["info"]["Image"],
@@ -50,6 +51,7 @@ const GetData = () => {
                     <View style = {styles.innerText}>
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
+                        <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
                     </View>
                     
                     </View> 

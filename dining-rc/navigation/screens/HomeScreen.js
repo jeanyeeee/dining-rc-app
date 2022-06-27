@@ -10,16 +10,7 @@ import GetStalls from '../../api/AllStalls';
 
 
 //MAIN: HomeScreen
-export default function HomeScreen({navigation}) {
-  //Navigation
-  useEffect(() => {
-    const focusHandler = navigation.addListener('focus', () => {
-      Alert.alert("Page refreshed");
-    })
-    return focusHandler;
-  }, [navigation]);
-
-
+export default function HomeScreen({route, navigation}) {
   //Create the Button
   const [dish, setDish] = useState(true)
   //change to listen to person user name after

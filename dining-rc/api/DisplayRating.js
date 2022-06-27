@@ -4,9 +4,12 @@ import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetSingleImage from '../ui/SingleImagePicker';
+import * as RootNavigation from '../navigation/RootNavigation';
+
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
 const GetRating = ({foodID, foodName, foodImage}) => {
+
     const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
     const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
