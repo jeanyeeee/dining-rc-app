@@ -5,6 +5,7 @@ import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetSingleImage from '../ui/SingleImagePicker';
 import * as RootNavigation from '../navigation/RootNavigation';
+import GetAveRating from '../ui/GetAveRating';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
@@ -35,7 +36,8 @@ const GetRating = ({foodID, foodName, foodImage}) => {
         <View style = {styles.container}>
             <View style= {styles.image}>
             <GetSingleImage name = {foodImage} />
-            <Text style = {styles.heading}>{foodName}</Text> 
+            <Text style = {styles.heading}>{foodName}</Text>
+            <GetAveRating style= {styles.heading} foodID={foodID} />
             </View>
                 <View>
                     <FlatList 
