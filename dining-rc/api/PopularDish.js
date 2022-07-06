@@ -54,7 +54,8 @@ const GetData = (navigation) => {
                     <View style = {styles.innerText}>
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
-                        <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
+                        {/*MILESTONE 3*/}
+                        {/* <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/> */}
                     </View>
                     
                     </View> 
