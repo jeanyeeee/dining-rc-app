@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'firebase/firestore';
+import { doc, getFirestore, collection, getDocs , getDoc, query, where, orderBy} from 'firebase/firestore';
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
@@ -7,16 +7,19 @@ import GetRating from './DisplayRating';
 import GetImage from '../ui/ImagePicker';
 import * as RootNavigation from '../navigation/RootNavigation';
 import GetAveRating from '../ui/GetAveRating';
+import GetUpdateRating from './UpdateRating';
+import GetSortRating from './SortScreen';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
 const GetData = (navigation) => {
     const [food, setFood] = useState([]);
-    const foodColl = collection(db, "DiningFood");
-
+    const foodColl = collection(db, "DiningFood")
+    const f1 = query(foodColl, orderBy("Average Rating", "desc"));
+ 
     useEffect(() => {
         async function fetchData() {
-            const foodSnapshot = await getDocs(foodColl);
+            const foodSnapshot = await getDocs(f1);
             const foods = [];
             //for each food in the list
             const foodList = foodSnapshot.docs.map(doc => {
