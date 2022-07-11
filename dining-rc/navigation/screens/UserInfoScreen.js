@@ -1,17 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import ProfileNavigate from '../ProfileNav';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ProfileScreen  = ({navigation}) => {
+const UserInfoScreen  = ({navigation}) => {
     return(
         <View style= {styles.container}>
-            <Text>Profile Page</Text> 
-            <ProfileNavigate/>
+            <Text>Profile Page</Text>   
         </View>
     )
 }
 
-export default ProfileScreen;
+export default UserInfoScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -19,5 +18,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pressable: {
+    backgroundColor: "#DFE2E5",
+    padding: 15,
+    borderRadius: 15,
+    margin: 15,
+    marginHorizontal: 20
   },
 });
