@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "dining-rc",
-    "slug": "dining-rc",
+    "slug": "dining-rc-app",
     "version": "1.0.0",
+    "owner": "jeanyeeee",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,16 +19,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jeanyeeee.diningrcapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.jeanyeeee.diningrcapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Dining RC Orbital App ",
+    "githubUrl": "https://github.com/jeanyeeee/dining-rc-app"
   }
 }

@@ -6,7 +6,6 @@ import React, {useEffect, useRef, useState} from 'react';
 
 
 //Using the array, function get average rating
-
 const GetUpdateRating = ({food}) => {
 
             //begin

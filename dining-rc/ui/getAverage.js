@@ -1,4 +1,6 @@
-//Get the Average Rating for the food
+//For the array, it will get the rating for the dishes from the database
+//Not used anywhere yet
+
 import { StyleSheet, View, Text } from "react-native"
 import { doc, updateDoc, collection, getDocs , getDoc, query, where, serverTimestamp} from 'firebase/firestore';
 import {db} from '../firebase';

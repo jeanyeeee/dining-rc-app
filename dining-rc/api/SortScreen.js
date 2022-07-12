@@ -11,7 +11,7 @@ import GetUpdateRating from "./UpdateRating";
 const GetSortRating = () => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood");
-    console.log("hi")
+    console.log("Get Sort Rating: Start")
     useEffect(() => {
         async function fetchData() {
             const foodSnapshot = await getDocs(foodColl);
@@ -31,7 +31,7 @@ const GetSortRating = () => {
     }
     fetchData();
 }, [])
-
+//food = {data}, data's type is an array of object
     return food.map(data => <GetUpdateRating food = {data}/>)
 }
 
