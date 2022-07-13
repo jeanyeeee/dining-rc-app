@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button, Alert} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,21 +7,16 @@ const Stack = createNativeStackNavigator();
 import { db } from '../../firebase';
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
-import GetNewUpdateRating from '../../api/NewUpdateRating';
-import GetRatingToDish from '../../api/RatingToDish';
-
-
 //MAIN: HomeScreen
 export default function HomeScreen({route, navigation}) {
   //Create the Button
   const [dish, setDish] = useState(true)
   //change to listen to person user name after
-  const user = "You"
   return(
     <View style= {styles.container}>
       {/* Header Buttons - Hello, <User> and Image */}
       <View>
-        <Text style= {styles.text}>Hello, {user}</Text> 
+        <Text style={styles.text}>Hello, You</Text>
       </View>
       {/* Header Buttons -  Popular Dishes, All Stalls */}
       <View style= {styles.buttonArrangement}>

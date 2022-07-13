@@ -4,15 +4,19 @@ import BottomTab from './navigation/tabs';
 import {View, StyleSheet} from 'react-native';
 import { navigationRef } from './navigation/RootNavigation';
 import {createStackNavigator} from '@react-navigation/stack';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 const App = () => {
   return(
-    <NavigationContainer ref={navigationRef}>
-          <BottomTab />
-          <View style= {styles.container}>
-          </View>
-      </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+            <BottomTab />
+            <View style= {styles.container}>
+            </View>
+        </NavigationContainer>
+      </SafeAreaProvider>
+
   );
 }
 
