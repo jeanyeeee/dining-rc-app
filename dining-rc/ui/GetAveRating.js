@@ -27,7 +27,7 @@ const GetAveRating = ({foodID}) => {
         setRating(ratings)
     }
     fetchData();
-}, [])
+}, [foodID])
     
     const array = rating.map(a => a["info"]);
 

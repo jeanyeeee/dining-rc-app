@@ -1,3 +1,4 @@
+//after signing in to the app
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#DFE2E5",
     padding: 15,
     borderRadius: 15,
-    margin: 15,
+    margin: 100,
     marginHorizontal: 20
   },
 });

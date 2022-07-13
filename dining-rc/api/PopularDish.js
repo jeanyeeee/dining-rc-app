@@ -16,7 +16,7 @@ const GetData = (navigation) => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood")
     const f1 = query(foodColl, orderBy("Average Rating", "desc"));
- 
+
     useEffect(() => {
         async function fetchData() {
             const foodSnapshot = await getDocs(f1);

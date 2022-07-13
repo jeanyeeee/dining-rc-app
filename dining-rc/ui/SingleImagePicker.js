@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 // Get a reference to the storage service, which is used to create references in your storage bucket
 
-const GetSingleImage = (props) => {
+const GetSingleImage = ({name}) => {
     const [url, setUrl] = useState();
 
     useEffect(() => {
@@ -11,13 +11,12 @@ const GetSingleImage = (props) => {
             const storage = getStorage();
             // Create a storage reference from our storage service
             // Will be replaced with the extracted path later
-            const storageRef = ref(storage, props.name);
+            const storageRef = ref(storage, name);
             await getDownloadURL(storageRef).then((ref) => {setUrl(ref)});
 
         }
         func();
-    }, []);
-
+    }, [name]);
     return(
         <View>
             <Image 
