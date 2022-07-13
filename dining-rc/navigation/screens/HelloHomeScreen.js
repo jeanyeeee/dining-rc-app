@@ -22,7 +22,7 @@ const HelloHomeScreen = () => {
         <IconButton
           name='logout'
           size={24}
-          color='#fff'
+          color='#2A3037'
           onPress={handleSignOut}
         />
       </View>
