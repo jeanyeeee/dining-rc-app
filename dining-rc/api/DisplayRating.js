@@ -1,7 +1,7 @@
 import { async } from '@firebase/util';
 import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'firebase/firestore';
 import {db} from '../firebase';
-import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
+import {View, Text, FlatList, StyleSheet, Pressable, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetSingleImage from '../ui/SingleImagePicker';
 import * as RootNavigation from '../navigation/RootNavigation';
@@ -9,8 +9,9 @@ import GetAveRating from '../ui/GetAveRating';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetRating = ({foodID, foodName, foodImage}) => {
-
+const GetRating = ({foodID, foodName, foodImage, navigation}) => {
+ //check if your page is refreshed
+  
     const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
     const qRating = query(ratingColl, where("Food ID", "==", foodID)) //Will change to the foodID
@@ -31,11 +32,12 @@ const GetRating = ({foodID, foodName, foodImage}) => {
         setRating(ratings);
     }
     fetchData();
-}, [])    
+}, [foodID])    
+
     return(
         <View style = {styles.container}>
             <View style= {styles.image}>
-            <GetSingleImage name = {foodImage} />
+            <GetSingleImage name = {foodImage} navigation = {navigation}/>
             <Text style = {styles.heading}>{foodName}</Text>
             <GetAveRating style= {styles.heading} foodID={foodID} />
             </View>
