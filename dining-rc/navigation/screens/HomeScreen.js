@@ -8,7 +8,6 @@ import { db } from '../../firebase';
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
 
-
 //MAIN: HomeScreen
 export default function HomeScreen({route, navigation}) {
   //Create the Button
