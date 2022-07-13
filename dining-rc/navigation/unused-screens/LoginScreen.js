@@ -2,10 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, KeyboardAvoidingView} from 'react-native';
 import ButtonComponent from '../../components/ButtonComponent';
-import InputField from '../../components/ErrorMessage'
-import ErrorMessage from '../../components/InputField'
+import InputField from '../../components/InputField'
+import ErrorMessage from '../../components/ErrorMessage'
 
 const auth = getAuth();
 
@@ -25,16 +25,16 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style='dark-content' />
-      <Text style={styles.title}>Login</Text>
+    <KeyboardAvoidingView style= {styles.container} behavior="padding">
+    <ScrollView>
+      <Text style={styles.title}>Login Page Start</Text>
       <InputField
         inputStyle={{
           fontSize: 14
         }}
         containerStyle={{
           backgroundColor: '#fff',
-          marginBottom: 20
+          marginBottom: 50
         }}
         placeholder='Enter email'
         autoCapitalize='none'
@@ -60,10 +60,10 @@ export default function LoginScreen({ navigation }) {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
+      {loginError ? <ErrorMessage error= {loginError} visible={true} /> : null}
       <ButtonComponent  //this is component
         onPress={onLogin}
-        backgroundColor='#f57c00'
+        backgroundColor='#f57c00' //colour of the login button
         title='Login'
         tileColor='#fff'
         titleSize={20}
@@ -73,25 +73,18 @@ export default function LoginScreen({ navigation }) {
       />
       <Button
         onPress={() => navigation.navigate('Signup')}
-        title='Go to Signup'
-        color='#fff'
+        title='Go to Sign Up'
+        color='#000000'
       />
-    </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e93b81',
-    paddingTop: 50,
-    paddingHorizontal: 12
+    alignItems: "center",
+    justifyContent: "center"
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#fff',
-    alignSelf: 'center',
-    paddingBottom: 24
-  }
 });

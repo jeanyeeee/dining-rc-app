@@ -1,15 +1,21 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
-
+import HelloLoginScreen from './screens/HelloLoginScreen';
+import LoginScreen from './unused-screens/LoginScreen';
+import SignupScreen from './unused-screens/SignupScreen';
+import HelloSignUpScreen from './screens/HelloSignUpScreen';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 const Stack = createStackNavigator();
 
 export default function AuthStack() {   
   return (
-    <Stack.Navigator headerShown = {false}>
-      <Stack.Screen name='Login' component={LoginScreen} />
-      <Stack.Screen name='Signup' component={SignupScreen} />
-    </Stack.Navigator>
+    <SafeAreaProvider>
+        <Stack.Navigator>
+          <Stack.Screen options= {{headerShown: false}} name='Login' component={HelloLoginScreen} />
+          <Stack.Screen options= {{headerShown: false}} name='Signup' component={HelloSignUpScreen} /> 
+        </Stack.Navigator>
+      </SafeAreaProvider>
+
   );
 }
+

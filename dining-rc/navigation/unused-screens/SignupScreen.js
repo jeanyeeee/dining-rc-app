@@ -50,8 +50,8 @@ export default function SignupScreen({ navigation }) {
       {signupError ? <ErrorMessage error={signupError} visible={true} /> : null}
       <Button
         onPress={onHandleSignup}
-        backgroundColor='#f57c00'
-        title='Signup'
+        backgroundColor='#f57c00' //sign up button colour
+        title='Signup-Old'
         tileColor='#fff'
         titleSize={20}
         containerStyle={{
