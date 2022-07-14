@@ -1,65 +1,60 @@
 import { async } from '@firebase/util';
-import { doc, getFirestore, collection, getDocs , getDoc, query, where, orderBy} from 'firebase/firestore';
+import { doc, getFirestore, collection, getDocs , getDoc, query, orderBy} from 'firebase/firestore';
 import {db} from '../firebase';
-import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
+import {View, Text, FlatList, StyleSheet, Pressable, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import GetImage from '../ui/ImagePicker';
-import * as RootNavigation from '../navigation/RootNavigation';
 import GetAveRating from '../ui/GetAveRating';
+import GetImage from '../ui/ImagePicker';
 
-//TODO: Need to include ratings too
-//TODO: onPress -> go to rating page w only the food item
-const GetData = (navigation) => {
-    const [food, setFood] = useState([]);
-    const foodColl = collection(db, "DiningFood")
-    const f1 = query(foodColl, orderBy("Average Rating", "desc"));
-
+//TODO: query according to the date of today
+const GetForumReview = ({navigation}) => {//input: today time
+    const [rating, setRating] = useState([]);
+    const ratingColl = collection(db, "StudentRating");
+    const qRating = query(ratingColl, orderBy("Date", "desc")) //change into date and for today food only!
     useEffect(() => {
         async function fetchData() {
-            const foodSnapshot = await getDocs(f1);
-            const foods = [];
+            const ratingSnapshot = await getDocs(qRating);
+            const ratings = [];
             //for each food in the list
-            const foodList = foodSnapshot.docs.map(doc => {
+            const ratingList = ratingSnapshot.docs.map(doc => {
                //console.log("Data is", doc.data())
                const obj = doc.data(); //Refers to 1 food item
-               foods.push({
+               ratings.push({
                 id: doc.id, //Random generated
                 info: obj //Other information relating to the food
                })
                })
-        //console.log(foods);
-        setFood(foods)
+        //console.log(ratings);
+        setRating(ratings);
     }
     fetchData();
-}, [])    
+}, [qRating])    
 
-//onPress navigation feature to be added after static pages have been fully created 
+    //need create a edit/delete button
+    //need a create new review button
+    //in create new, can choose from a list of stall, and a list of food that stall serve that day. can choose date first
+    //after create new, get data of the food and put : image, stall name, food name, review, rating, date into the database
+
+    /*return a flat list of reviews, similar to the popular dishes */
     return(
         <FlatList 
         style= {{height: '100%'}}
-        data = {food}
+        data = {rating}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable} 
-            onPress={() => {RootNavigation.navigate('Dish', 
-            {foodID: item["info"]["Food ID"], 
-            foodName: item["info"]["Food Name"],
-            foodImage: item["info"]["Image"],
-            })}}>
                 <View style = {styles.inner}>
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                         <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
-                    </View>
-                    
+                        <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
-            </Pressable> 
+                </View> 
         )} />
     )
 }
-export default GetData;
+export default GetForumReview;
 
 const styles = StyleSheet.create({
     container: {

@@ -1,8 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HelloLoginScreen from './screens/HelloLoginScreen';
-import LoginScreen from './unused-screens/LoginScreen';
-import SignupScreen from './unused-screens/SignupScreen';
 import HelloSignUpScreen from './screens/HelloSignUpScreen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 const Stack = createStackNavigator();

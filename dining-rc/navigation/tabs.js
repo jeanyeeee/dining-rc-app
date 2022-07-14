@@ -8,6 +8,7 @@ import CartScreen from './screens/CartScreen';
 import DishScreen from './screens/DishScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import * as RootNavigation from '../navigation/RootNavigation';
+import ForumScreen from './screens/ForumScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +45,8 @@ const BottomTab = () => {
   >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Dish" component={DishScreen}></Tab.Screen>
-      <Tab.Screen name="Cart" component={CartScreen}></Tab.Screen>
+      {/*right now the cart is the forum */}
+      <Tab.Screen name="Cart" component={ForumScreen}></Tab.Screen>
       <Tab.Screen name="Profile" component={ProfileScreen}></Tab.Screen>
     </Tab.Navigator>
   );
