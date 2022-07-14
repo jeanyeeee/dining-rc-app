@@ -28,7 +28,13 @@ export default function SignupScreen({ navigation }) {
   const onHandleSignup = async () => {
     try {
       if (email !== '' && password !== '') {
-        await createUserWithEmailAndPassword(auth, email, password);
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user.email);
+
+        })
       }
     } catch (error) {
       setSignupError(error.message);

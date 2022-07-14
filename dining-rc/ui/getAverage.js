@@ -5,7 +5,6 @@ import { StyleSheet, View, Text } from "react-native"
 import { doc, updateDoc, collection, getDocs , getDoc, query, where, serverTimestamp} from 'firebase/firestore';
 import {db} from '../firebase';
 import React, {useEffect, useState} from 'react';
-import { defineAnimation } from "react-native-reanimated";
 
 
 //Takes in the unfiltered array

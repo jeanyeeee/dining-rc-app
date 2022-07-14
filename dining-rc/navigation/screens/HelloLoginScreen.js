@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, KeyboardAvoidingView} from 'react-native';
 import { ButtonComponent, InputField, ErrorMessage } from '../../components';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const auth = getAuth();
 export default function LoginScreen({ navigation }) {
@@ -26,8 +26,12 @@ export default function LoginScreen({ navigation }) {
   const onLogin = async () => {
     try {
       if (email !== '' && password !== '') {
-        await signInWithEmailAndPassword(auth, email, password);
-        }      
+        signInWithEmailAndPassword(auth,email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user.email);
+        })}
   } catch (error) {
       setLoginError(error.message);
     }
@@ -106,7 +110,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: '#2A3037',
-    alignContent: 'left',
     paddingBottom: 10,
   },
   smallText: {
