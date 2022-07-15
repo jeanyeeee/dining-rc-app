@@ -15,11 +15,10 @@ const DishScreen  = ({route, navigation}) => {
   const food = route.params;
   return(
     <View style= {styles.container}>
-    {/* To replace after testing of add food AddFood.js
       {food? <GetRating foodID = {food.foodID} foodName = {food.foodName} foodImage= {food.foodImage} navigation = {navigation} /> : <GetAllRating />}
-      */}
-
+      {/* Used to test for adding food!
       {food? <GetRating foodID = {food.foodID} foodName = {food.foodName} foodImage= {food.foodImage} navigation = {navigation} /> : <AddFood />}
+    */}
     </View> 
   );}
 
