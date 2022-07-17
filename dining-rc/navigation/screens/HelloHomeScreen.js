@@ -23,17 +23,8 @@ const HelloHomeScreen = () => {
         <Text style={styles.title}>Hello, {user.email}!</Text>
         </View>
         {/*Middle */}
-        <Text style= {[styles.title, {paddingBottom: 20}]}>Meal Credits</Text>
+        <Text style= {[styles.title, {paddingBottom: 20}]}>Reviews</Text>
         <View style=  {{flexDirection: "row", width: '100%', justifyContent: "space-between"}}>
-          <View style=  {{flexDirection: "column"}}>
-            <Text style = {styles.biggerText}>Breakfast</Text>
-            <Text style = {styles.biggerText}>Dinner</Text>
-          </View>
-          <View style=  {{flexDirection: "column"}}>
-            {/* Replace with the users credits */}
-            <Text style = {[styles.biggerText, {fontWeight: "bold"}]}>{breakfastCredits}</Text>
-            <Text style = {[styles.biggerText, {fontWeight: "bold"}]} >{dinnerCredits}</Text>
-          </View>
         </View>
         {/* 
         <View style = {{paddingTop: 20}}>

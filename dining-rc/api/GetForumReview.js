@@ -5,6 +5,7 @@ import {View, Text, FlatList, StyleSheet, Pressable, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetAveRating from '../ui/GetAveRating';
 import GetImage from '../ui/ImagePicker';
+//TODO: Take image from DiningFood instead!!!!
 
 //TODO: query according to the date of today
 const GetForumReview = ({navigation}) => {//input: today time
@@ -42,21 +43,35 @@ const GetForumReview = ({navigation}) => {//input: today time
         data = {rating}
         numColumns = {1}
         renderItem = {({item}) => (
+            <View style = {styles.pressable}>
                 <View style = {styles.inner}>
+                {/* TODO: error in download url!!! */}
                     <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
                     <View style = {styles.innerText}>
+                        {/*From Dining Food */}
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
+
+                        {/* From StudentRating Database */}
                         <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
                 </View> 
+                </View>
         )} />
     )
 }
 export default GetForumReview;
 
 const styles = StyleSheet.create({
+    buttonStyle:  {
+        backgroundColor: "#DFE2E5",
+        marginTop: 20, 
+        flexDirection: 'row', 
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     container: {
         flex: 1,
         marginTop: 100,
@@ -88,5 +103,34 @@ const styles = StyleSheet.create({
     innerText: {
         flexDirection: "column",
         marginLeft: 20, 
-    }
-})
+    },
+        container: {
+            flex: 1,
+            marginTop: 100,
+        },
+        pressable: {
+            backgroundColor: "#DFE2E5",
+            padding: 15,
+            borderRadius: 15,
+            margin: 15,
+            marginHorizontal: 20
+        },
+        inner: {
+            alignItems: "center",
+            flexDirection: "row"
+        },
+        heading: {
+            fontWeight: "bold"
+        },
+        itemText: {
+            fontWeight: "300",
+            width: 250,
+        },
+        image: {
+            justifyContent: 'center',
+        },
+        innerText: {
+            flexDirection: "column",
+            marginLeft: 20, 
+        }
+    })

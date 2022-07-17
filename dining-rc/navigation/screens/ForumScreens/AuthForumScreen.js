@@ -1,17 +1,28 @@
 import React, {useEffect} from 'react';
-import {View, Text, Button, StyleSheet, Alert} from 'react-native';
+import {View, Text, Button, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import GetForumReview from '../../../api/GetForumReview';
+import { ButtonComponent } from '../../../components';
 
 const AuthForumScreen  = ({navigation}) => {
   return(
     <View style= {styles.container}>
-      <Text>Forum Screen here!</Text>
+      <Text>This is the forum screen here!</Text>
+      {/*Load the reviews here */}
       <GetForumReview navigation={navigation}/>
-      <Button 
-        style = {styles.floatingCreateButtonStyle}
-        onPress = {() => navigation.navigate('NewReview')}
-        title = "Create new Review"
+      <View style={styles.bottomButton}>
+        <ButtonComponent
+          style = {styles.button}
+          onPress={() => navigation.navigate('NewReview')}
+          backgroundColor='#0B735F'
+          title='Add Your Review'
+          
+          tileColor='#fff'
+          titleSize={20}
+          containerStyle={{
+            marginBottom: 24
+          }}
         />
+      </View>
     </View> 
   );}
 
@@ -26,9 +37,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  floatingCreateButtonStyle: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: 35
-  }, 
+  button:{
+    
+    color: "#0B735F",
+    alignItems: "center",
+  },
+  bottomButton: {
+    justifyContent:"flex-end",
+    flex: 1,
+    marginBottom: 20,
+  }
 });

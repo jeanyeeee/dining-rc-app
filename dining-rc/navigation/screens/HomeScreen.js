@@ -15,9 +15,9 @@ export default function HomeScreen({route, navigation}) {
   return(
     <View style= {styles.container}>
       {/* Header Buttons - Hello, <User> and Image */}
-      <View>
-        <Text style={styles.text}>Hello, You</Text>
-      </View>
+        <View>
+          <Text style={styles.text}>Hello, You</Text>
+        </View>
       {/* Header Buttons -  Popular Dishes, All Stalls */}
       <View style= {styles.buttonArrangement}>
         {/* Header Buttons -  Popular Dishes */}

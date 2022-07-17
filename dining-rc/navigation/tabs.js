@@ -22,10 +22,10 @@ const BottomTab = () => {
         if (route.name === 'Home') {
           iconName = focused ? 'home': 'home-outline';
         
-        } else if (route.name === 'Cart') {
+        } else if (route.name === 'Reviews') {
           iconName = focused ? 
-          'cart' : 
-          'cart-outline';
+          'newspaper' : 
+          'newspaper-outline';
         } else if (route.name === 'Dish') {
           iconName = focused ? 
           'cafe' : 
@@ -46,7 +46,7 @@ const BottomTab = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Dish" component={DishScreen}></Tab.Screen>
       {/*right now the cart is the forum */}
-      <Tab.Screen name="Cart" component={ForumScreen}></Tab.Screen>
+      <Tab.Screen name="Reviews" component={ForumScreen}></Tab.Screen>
       <Tab.Screen name="Profile" component={ProfileScreen}></Tab.Screen>
     </Tab.Navigator>
   );
