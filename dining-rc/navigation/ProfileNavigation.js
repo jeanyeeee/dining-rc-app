@@ -7,6 +7,7 @@ import AuthStack from './AuthNavigation';
 import UserInfoStack from './UserInfoStack';
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import BottomTab from './tabs';
 
 const auth = getAuth();
 
@@ -42,6 +43,7 @@ export default function ProfileNavigator() {
   }
 
   return (
-      user ? <UserInfoStack/> : <AuthStack />
+    //change from userInfoStack to tab.js
+      user ? <BottomTab/> : <AuthStack />
   );
 }
