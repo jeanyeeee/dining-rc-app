@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button, KeyboardAvoidingView} from 'react-native';
 import { ButtonComponent, InputField, ErrorMessage } from '../../../components';
 import { getAuth } from 'firebase/auth';
+import { db } from '../../../firebase';
+import { addDoc, collection, doc, FieldValue, Timestamp } from 'firebase/firestore';
 
 //TODO: integrate authentication before add new review
 //TODO: handle error, update database, after submit redirect to the forum (and the forum must show the newest update)
@@ -14,6 +16,7 @@ export default function InputNewReviewScreen({route, navigation }) {
   const [loginError, setLoginError] = useState('');
 
   const food = route.params // contain: stallName, foodName, foodID, foodImage
+  const auth = getAuth();
 
   const onSubmit = async () => {
     try {
@@ -23,9 +26,19 @@ export default function InputNewReviewScreen({route, navigation }) {
         console.log("rating: ", Rating);
         console.log("review: ", Review);
         console.log("Food Name ", food.foodName);
+        await addDoc(collection(db, "StudentRating"), {
+          Date: Timestamp.now(),
+          Feedback: Review,
+          "Food ID": food.foodID,
+          "Food Name": food.foodName,
+          Rating: parseInt(Rating),
+          userID: auth.currentUser.uid
+        });
+        navigation.navigate("AuthForum");
         }      
   } catch (error) {
       //setLoginError(error.message);
+      console.log("error: ", error.message);
     }
   };
 
@@ -49,8 +62,8 @@ export default function InputNewReviewScreen({route, navigation }) {
         autoCapitalize='none'
         keyboardType='number-pad' //need to limit to 5 or handle error when input > 5
         autoFocus={true}
-        value={Review}
-        onChangeText={text => setReview(text)}
+        value={Rating}
+        onChangeText={text => setRating(text)}
       />
       <InputField
         inputStyle={{
@@ -64,8 +77,8 @@ export default function InputNewReviewScreen({route, navigation }) {
         autoCapitalize='none'
         keyboardType='default'
         autoFocus={true}
-        value={Rating}
-        onChangeText={text => setRating(text)}
+        value={Review}
+        onChangeText={text => setReview(text)}
       />
       
       {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
