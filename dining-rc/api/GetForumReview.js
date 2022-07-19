@@ -53,7 +53,7 @@ const GetForumReview = ({navigation}) => {//input: today time
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
 
                         {/* From StudentRating Database */}
-                        <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
+                        <Text style= {styles.itemText}>Rating: {item["info"]["Rating"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
                 </View> 
