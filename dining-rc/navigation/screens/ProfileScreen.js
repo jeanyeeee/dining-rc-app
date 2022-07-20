@@ -1,10 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import ProfileNavigate from '../ProfileNav';
-import AuthStack from '../AuthNavigation';
 import { getAuth } from 'firebase/auth';
 import { ButtonComponent } from '../../components';
-import { FieldValue } from 'firebase/firestore';
 //
 const ProfileScreen  = ({navigation}) => {
    const auth = getAuth();

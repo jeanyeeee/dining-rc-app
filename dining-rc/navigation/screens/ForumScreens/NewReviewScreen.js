@@ -13,8 +13,8 @@ const auth = getAuth();
 export default function NewReviewScreen({ navigation }) {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood")
-    const f1 = query(foodColl, orderBy("Average Rating", "desc"));
-
+    const f1 = query(foodColl, orderBy("Stall Name", "asc"));
+    //TO DO: show today only food
     useEffect(() => {
         async function fetchData() {
             const foodSnapshot = await getDocs(f1);
@@ -41,7 +41,7 @@ export default function NewReviewScreen({ navigation }) {
 
   return(
     <View style = {{backgroundColor: "white"}}>
-        <Text style = {styles.topText}>Please choose a dish you would like to review</Text>
+        <Text style = {styles.topText}>Choose A Dish</Text>
         <FlatList 
             style= {{height: '100%'}}
             data = {food}
@@ -84,8 +84,10 @@ pressable: {
     marginHorizontal: 20
 },
 topText: {
-    fontWeight: "300",
-    textAlign: 'center',
+        fontWeight: "bold",
+        fontSize: 20,
+        paddingTop: 20,
+        textAlign: "center",
 },
 inner: {
     alignItems: "center",
