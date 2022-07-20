@@ -28,7 +28,8 @@ const GetRatingToDish = (navigation) => {
             const foodList = foodSnapshot.docs.map(doc => {
                //console.log("Data is", doc.data())
                const obj = doc.data(); //Refers to 1 food item
-               GetNewUpdateRating(obj);
+               console.log(obj);
+               GetUpdateRating(obj);
                foods.push({
                 id: doc.id, //Random generated
                 info: obj //Other information relating to the food
