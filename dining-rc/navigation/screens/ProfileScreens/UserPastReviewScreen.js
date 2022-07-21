@@ -2,7 +2,7 @@
 //for not log in user
 import React, {useEffect, useRef} from 'react';
 import {View, Text, Button, StyleSheet, Alert} from 'react-native';
-import GetUserReview from '../../../api/GetUserPastReviewScreen';
+import GetUserReview from '../../../api/GetUserPastReview';
 import { ButtonComponent, IconButton } from '../../../components';
 
 const PastReviewScreen  = ({navigation}) => {
