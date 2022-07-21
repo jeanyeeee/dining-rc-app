@@ -6,7 +6,7 @@ import { ButtonComponent } from '../../../components';
 const AuthForumScreen  = ({navigation}) => {
   return(
     <View style= {styles.container}>
-      <Text>This is the forum screen here!</Text>
+      <Text style= {styles.text}>Your Friends Say...</Text>
       {/*Load the reviews here */}
       <GetForumReview navigation={navigation}/>
       <View style={styles.bottomButton}>
@@ -46,5 +46,10 @@ const styles = StyleSheet.create({
     justifyContent:"flex-end",
     flex: 1,
     marginBottom: 20,
+  },
+  text:{
+    fontWeight: "bold",
+    fontSize: 20,
+    paddingTop: 10,
   }
 });

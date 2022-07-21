@@ -17,7 +17,8 @@ export default function InputNewReviewScreen({route, navigation }) {
 
   const food = route.params // contain: stallName, foodName, foodID, foodImage
   const auth = getAuth();
-
+  
+  //TO DO: sync to Firebase
   const onSubmit = async () => {
     try {
       if (Rating !== '' && Review !== '') {
@@ -26,8 +27,9 @@ export default function InputNewReviewScreen({route, navigation }) {
         console.log("rating: ", Rating);
         console.log("review: ", Review);
         console.log("Food Name ", food.foodName);
+        //The date Aug 30 is set so that the food item will appear first!
         await addDoc(collection(db, "StudentRating"), {
-          Date: Timestamp.now(),
+          Date: Timestamp.fromDate(new Date("August 30, 2022")),
           Feedback: Review,
           "Food ID": food.foodID,
           "Food Name": food.foodName,
@@ -51,7 +53,7 @@ export default function InputNewReviewScreen({route, navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style='dark-content' />
-      <Text style={styles.title}>Tell us what you think of this dish</Text>
+      <Text style={styles.title}>What do you think of {food.foodName}?</Text>
       <InputField
         inputStyle={{
           fontSize: 14
@@ -62,7 +64,7 @@ export default function InputNewReviewScreen({route, navigation }) {
         }}
         placeholder='Rate this dish'
         autoCapitalize='none'
-        keyboardType='number-pad' //need to limit to 5 or handle error when input > 5
+        keyboardType='number-pad' //TO DO: need to limit to 5 or handle error when input > 5
         autoFocus={true}
         value={Rating}
         onChangeText={text => setRating(text)}

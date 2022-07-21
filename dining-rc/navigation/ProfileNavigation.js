@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { View, ActivityIndicator } from 'react-native';
-
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
 import AuthStack from './AuthNavigation';
-import UserInfoStack from './UserInfoStack';
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import BottomTab from './tabs';
 
