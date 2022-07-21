@@ -31,6 +31,8 @@ export default function InputNewReviewScreen({route, navigation }) {
           Feedback: Review,
           "Food ID": food.foodID,
           "Food Name": food.foodName,
+          "Stall Name": food.stallName,
+          "Image": food.foodImage,
           Rating: parseInt(Rating),
           userID: auth.currentUser.uid
         });

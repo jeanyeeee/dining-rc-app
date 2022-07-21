@@ -1,20 +1,28 @@
 import { async } from '@firebase/util';
-import { doc, getFirestore, collection, getDocs , getDoc, query, orderBy, where} from 'firebase/firestore';
+import { doc, getFirestore, collection, getDocs , getDoc, query, orderBy, where, deleteDoc, Timestamp} from 'firebase/firestore';
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import GetAveRating from '../ui/GetAveRating';
 import GetImage from '../ui/ImagePicker';
 import { getAuth } from 'firebase/auth';
+import { ButtonComponent, IconButton } from '../components';
 //TODO: Take image from DiningFood instead!!!!
 
 //TODO: query according to the date of today
 const GetUserReview = ({navigation}) => {//input: today time
-    const [rating, setRating] = useState([]);
+    //default state for debugging only
+    const [rating, setRating] = useState([{
+        id: 123,
+        info: {
+            Date: Timestamp.now(),
+        "Feedback": "Good",
+        "Rating": 5
+        }
+    }]);
     const ratingColl = collection(db, "StudentRating");
     const auth = getAuth();
     const userID = auth.currentUser.uid;
-    const qRating = query(ratingColl, where("userID", "==", userID), orderBy("Date", "desc")) //change into date and for today food only!
+    const qRating = query(ratingColl, where("userID", "==", userID)/*, orderBy("Date", "desc")*/) //change into date and for today food only!
     useEffect(() => {
         async function fetchData() {
             const ratingSnapshot = await getDocs(qRating);
@@ -32,7 +40,28 @@ const GetUserReview = ({navigation}) => {//input: today time
         setRating(ratings);
     }
     fetchData();
-}, [qRating])    
+}, [qRating])
+
+    const deleteReview = async (id) => {
+        return Alert.alert(
+            "Are your sure?",
+            "Are you sure you want to delete this review?",
+            [
+              // The "Yes" button
+              {
+                text: "Yes",
+                onPress: async () => {
+                    await deleteDoc(doc(db, "StudentRating", id));
+                },
+              },
+              // The "No" button
+              // Does nothing but dismiss the dialog when tapped
+              {
+                text: "No",
+              },
+            ]
+          );
+    }
 
     //need create a edit/delete button
     //need a create new review button
@@ -49,7 +78,9 @@ const GetUserReview = ({navigation}) => {//input: today time
             <View style = {styles.pressable}>
                 <View style = {styles.inner}>
                 {/* TODO: error in download url!!! */}
-                    <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
+                    <View flex = {"3"}>
+                        <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
+                    </View>
                     <View style = {styles.innerText}>
                         {/*From Dining Food */}
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
@@ -58,6 +89,34 @@ const GetUserReview = ({navigation}) => {//input: today time
                         {/* From StudentRating Database */}
                         <Text style= {styles.itemText}>Rating: {item["info"]["Rating"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
+                    </View>
+                    <View flex = {"1"} flexDirection = {"column"}>
+                            <View flex = {1}>
+                                <IconButton 
+                                    color ={'#000000'} 
+                                    size = {20} 
+                                    onPress = {() => deleteReview(item["id"])} 
+                                    name = {'delete'}
+                                />
+                            </View>
+                            <View flex = {1}>
+                                <IconButton 
+                                    color ={'#000000'} 
+                                    size = {20} 
+                                    onPress = {() => {navigation.navigate('EditScreen',
+                                        {
+                                            stallName: item["info"]["Stall Name"],
+                                            foodName: item["info"]["Food Name"],
+                                            foodID: item["info"]["Food ID"],
+                                            foodImage: item["info"]["Image"],
+                                            id: item["id"],
+                                            navigation: navigation,
+                                        })}} 
+                                    name = {'edit'}
+                                />
+                                {/**in route params add review id */}
+                            </View>
+                            
                     </View> 
                 </View> 
                 </View>
@@ -106,6 +165,7 @@ const styles = StyleSheet.create({
     innerText: {
         flexDirection: "column",
         marginLeft: 20, 
+        flex: 1,
     },
         container: {
             flex: 1,
