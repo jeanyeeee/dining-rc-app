@@ -6,6 +6,7 @@ import { ButtonComponent, InputField, ErrorMessage } from '../../../components';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../../firebase';
 import { addDoc, collection, doc, FieldValue, Timestamp } from 'firebase/firestore';
+import StarRatingComponent from '../../../components/StarRatingComponent';
 
 //TODO: integrate authentication before add new review
 //TODO: handle error, update database, after submit redirect to the forum (and the forum must show the newest update)
@@ -54,6 +55,8 @@ export default function InputNewReviewScreen({route, navigation }) {
     <View style={styles.container}>
       <StatusBar style='dark-content' />
       <Text style={styles.title}>What do you think of {food.foodName}?</Text>
+      <StarRatingComponent />
+      {/*
       <InputField
         inputStyle={{
           fontSize: 14
@@ -69,6 +72,8 @@ export default function InputNewReviewScreen({route, navigation }) {
         value={Rating}
         onChangeText={text => setRating(text)}
       />
+      */}
+
       <InputField
         inputStyle={{
           fontSize: 14
