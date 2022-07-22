@@ -77,7 +77,7 @@ const GetForumReview = ({navigation}) => {//input: today time
             //for each food in the list
             const ratingList = ratingSnapshot.docs.map(doc => {
                //console.log("Data is", doc.data())
-               const obj = doc.data(); //Refers to 1 food item
+               const obj = doc.data(); //Refers to 1 review
                ratings.push({
                 id: doc.id, //Random generated
                 info: obj //Other information relating to the food

@@ -7,6 +7,7 @@ const Stack = createNativeStackNavigator();
 import { db } from '../../firebase';
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
+import GetRatingToDish from '../../api/RatingToDish';
 //MAIN: HomeScreen
 export default function HomeScreen({route, navigation}) {
   //Create the Button
@@ -42,7 +43,7 @@ export default function HomeScreen({route, navigation}) {
     </TouchableOpacity>
       </View>
       {/*For Tabs*/}
-      {/*{dish? <GetRatingToDish navigation = {navigation} /> : <GetStalls/>}*/}
+      {/*dish? <GetRatingToDish navigation = {navigation} /> : <GetStalls/>*/}
       {dish? <GetData navigation = {navigation} /> : <GetStalls/>}
       </View>
 
