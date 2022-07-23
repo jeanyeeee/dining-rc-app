@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { doc, getFirestore, collection, getDocs , getDoc, query, where, orderBy} from 'firebase/firestore';
+import { doc, getFirestore, collection, getDocs , getDoc, query, where, orderBy, startAt, endAt, Timestamp, endBefore} from 'firebase/firestore';
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
@@ -9,11 +9,18 @@ import GetAveRating from '../ui/GetAveRating';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetData = (navigation) => {
+const GetData = ({navigation}) => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood")
-    const f1 = query(foodColl, orderBy("Average Rating", "desc"));
+    const currDate = new Date(2022,7,1)
+    const nextDate = new Date(2022,7, 2)
+    console.log("Curr Date" , currDate.toDateString())
+    console.log("Next Date" , nextDate.toDateString())
+    const f1 = query(foodColl, orderBy("Date", "asc"), startAt(new Timestamp.fromDate(currDate)), endBefore(new Timestamp.fromDate(nextDate)));
 
+    //console.log("Curr Date", currDate.slice(0,4));
+    //console.log("Next Date", nextDate);
+    //fDate = query(foodColl, where("Date", "==", new Date(1659326400000)))
     useEffect(() => {
         async function fetchData() {
             const foodSnapshot = await getDocs(f1);
@@ -51,7 +58,8 @@ const GetData = (navigation) => {
                     <View style = {styles.innerText}>
                         <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
-                        <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
+                        <Text style= {styles.itemText}>{item["info"]["Average Rating"]}</Text>
+                        {/* TO CHECK RATING != AVERAGE RATING <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/> */}
                     </View>
                     
                     </View> 

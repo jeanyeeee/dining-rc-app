@@ -1,24 +1,58 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Button, Alert} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, Alert} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { doc, getFirestore, collection, getDocs , getDoc} from 'firebase/firestore';
 const Stack = createNativeStackNavigator();
-import { db } from '../../firebase';
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
-import GetRatingToDish from '../../api/RatingToDish';
-import DatePickerComponent from '../../components/DatePickerComponent';
 import ShowDate from '../../components/ShowDate';
-//MAIN: HomeScreen
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 export default function HomeScreen({route, navigation}) {
-  //Create the Button
   const [dish, setDish] = useState(true)
-  //change to listen to person user name after
+
+  const [date, setDate] = useState(new Date(2022,7,30));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+
+    };
+    
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+    };
+    
+  const showDatepicker = () => {
+    showMode('date');
+    };
+
+
+
+
   return(
-    <View style= {styles.container}>
-      {/* Header Buttons - Hello, <User> and Image */}
-        <DatePickerComponent />
+    <View style= {styles.container}>        
+      {/*Date Picker*/}
+      <View>
+            <Button style= {styles.button} onPress={showDatepicker} title= "Select A Date" />
+          {show && (
+            <DateTimePicker
+              style = {styles.datepicker}
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              onChange={onChange}
+            />
+          )}
+          <View>
+            {date != new Date(1598051730000) ? <ShowDate timeStamp = {date.toDateString()} /> : <></>}
+          </View>
+        </View>
+        <Text style= {styles.textAlt}>{}</Text>
       {/* Header Buttons -  Popular Dishes, All Stalls */}
       <View style= {styles.buttonArrangement}>
         {/* Header Buttons -  Popular Dishes */}
@@ -44,7 +78,10 @@ export default function HomeScreen({route, navigation}) {
       </View>
       {/*For Tabs*/}
       {/*dish? <GetRatingToDish navigation = {navigation} /> : <GetStalls/>*/}
-      {dish? <GetData navigation = {navigation} /> : <GetStalls/>}
+      {dish? <GetData 
+      navigation = {navigation} 
+
+      /> : <GetStalls/>}
       </View>
 
   ); 
@@ -74,6 +111,7 @@ const styles = StyleSheet.create({
     padding: 20, 
     borderRadius: 20, 
   },
+
   rightButton: {
     padding: 20, 
     borderRadius: 20, 
@@ -86,5 +124,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  button: {
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  datepicker: {
+    alignSelf: "center",
+    paddingHorizontal: 45
   }
 });
