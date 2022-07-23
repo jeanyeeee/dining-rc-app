@@ -9,14 +9,17 @@ import GetAveRating from '../ui/GetAveRating';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetData = ({navigation}) => {
+const GetData = ({navigation, currDate, nextDate}) => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood")
-    const currDate = new Date(2022,7,1)
-    const nextDate = new Date(2022,7, 2)
-    console.log("Curr Date" , currDate.toDateString())
-    console.log("Next Date" , nextDate.toDateString())
-    const f1 = query(foodColl, orderBy("Date", "asc"), startAt(new Timestamp.fromDate(currDate)), endBefore(new Timestamp.fromDate(nextDate)));
+    //const currDate = new Date(2022,7,1)
+    //const nextDate = new Date(2022,7, 2)
+    
+    //console.log("Curr Date" , currDate.toDateString())
+    //console.log("Next Date" , nextDate.toDateString())
+    const f1 = query(foodColl, orderBy("Date", "asc"), 
+    startAt(new Timestamp.fromDate(currDate)), 
+    endBefore(new Timestamp.fromDate(nextDate)));
 
     //console.log("Curr Date", currDate.slice(0,4));
     //console.log("Next Date", nextDate);

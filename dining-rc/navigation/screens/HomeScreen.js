@@ -10,7 +10,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export default function HomeScreen({route, navigation}) {
   const [dish, setDish] = useState(true)
 
-  const [date, setDate] = useState(new Date(2022,7,30));
+  const [date, setDate] = useState(new Date(2022,7,1)); //this is Aug 1 2022
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -80,7 +80,8 @@ export default function HomeScreen({route, navigation}) {
       {/*dish? <GetRatingToDish navigation = {navigation} /> : <GetStalls/>*/}
       {dish? <GetData 
       navigation = {navigation} 
-
+      currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
+      nextDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)}
       /> : <GetStalls/>}
       </View>
 
