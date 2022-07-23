@@ -52,6 +52,7 @@ export default function EditScreen({route, navigation }) {
   //using react-native-material-dropdown
   //choosing the dish -> 
 
+  //TODO: replace with the stars component!!!
   return (
     <View style={styles.container}>
       <StatusBar style='dark-content' />

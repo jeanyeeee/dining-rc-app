@@ -1,20 +1,20 @@
 //this is the date picker component
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { Timestamp } from 'firebase/firestore';
+import ShowDate from './ShowDate';
 
 const DatePickerComponent = () => {
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    
-    //this is a global variable
-    global.dateString = date.getMilliseconds();
 
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
       setShow(false);
       setDate(currentDate);
+
     };
   
     const showMode = (currentMode) => {
@@ -26,19 +26,19 @@ const DatePickerComponent = () => {
       showMode('date');
     };
 
-    const ShowDate = (props) => {
-        return(
-            <View>
-                <Text>{props.date}</Text>
-            </View>
-        )
+    const showButton = () => {
+      return(
+        <View></View>
+      )
     }
+
   
     return (
       <View>
-          <Button onPress={showDatepicker} title= "Pick A Date" />
+          <Button style= {styles.button} onPress={showDatepicker} title= "Select A Date" />
         {show && (
           <DateTimePicker
+            style = {styles.datepicker}
             testID="dateTimePicker"
             value={date}
             mode={mode}
@@ -46,9 +46,21 @@ const DatePickerComponent = () => {
             onChange={onChange}
           />
         )}
-        {date != new Date(1598051730000) ? <ShowDate date= {date.toDateString()} /> : <></>}
+        <View>
+          {date != new Date(1598051730000) ? <ShowDate timeStamp = {date.toDateString()} /> : <></>}
+        </View>
       </View>
     );
   }
 
+const styles = StyleSheet.create({
+  button: {
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  datepicker: {
+    alignSelf: "center",
+    paddingHorizontal: 45
+  }
+})
 export default DatePickerComponent;

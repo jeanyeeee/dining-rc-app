@@ -8,6 +8,8 @@ import { db } from '../../firebase';
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
 import GetRatingToDish from '../../api/RatingToDish';
+import DatePickerComponent from '../../components/DatePickerComponent';
+import ShowDate from '../../components/ShowDate';
 //MAIN: HomeScreen
 export default function HomeScreen({route, navigation}) {
   //Create the Button
@@ -16,9 +18,7 @@ export default function HomeScreen({route, navigation}) {
   return(
     <View style= {styles.container}>
       {/* Header Buttons - Hello, <User> and Image */}
-        <View>
-          <Text style={styles.text}>Hello, You</Text>
-        </View>
+        <DatePickerComponent />
       {/* Header Buttons -  Popular Dishes, All Stalls */}
       <View style= {styles.buttonArrangement}>
         {/* Header Buttons -  Popular Dishes */}
