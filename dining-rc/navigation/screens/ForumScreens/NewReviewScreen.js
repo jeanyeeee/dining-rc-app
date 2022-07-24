@@ -50,7 +50,8 @@ export default function NewReviewScreen({ navigation }) {
                 <Pressable 
                     style = {styles.pressable} 
                     onPress={() => {navigation.navigate('InputNewReview',
-                    {
+                    {   
+                        id: item["id"],
                         stallName: item["info"]["Stall Name"],
                         foodName: item["info"]["Food Name"],
                         foodID: item["info"]["Food ID"],

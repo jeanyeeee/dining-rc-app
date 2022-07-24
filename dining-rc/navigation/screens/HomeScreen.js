@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import GetData from '../../api/PopularDish';
 import GetStalls from '../../api/AllStalls';
+import GetDishList from '../../api/DishList';
+//MAIN: HomeScreen
 import ShowDate from '../../components/ShowDate';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -77,7 +79,8 @@ export default function HomeScreen({route, navigation}) {
     </TouchableOpacity>
       </View>
       {/*For Tabs*/}
-      {/*dish? <GetRatingToDish navigation = {navigation} /> : <GetStalls/>*/}
+      {/*Uncomment below line for the update and desc home screen*/}
+      {/*dish? <GetDishList navigation = {navigation} /> : <GetStalls/>*/}
       {dish? <GetData 
       navigation = {navigation} 
       currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
