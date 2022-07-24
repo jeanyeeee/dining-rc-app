@@ -9,7 +9,6 @@ import GetAveRating from '../ui/GetAveRating';
 const GetStalls = () => {
     const [food, setFood] = useState([]);
     const foodColl = collection(db, "DiningFood");
-
     useEffect(() => {
         async function fetchData() {
             const foodSnapshot = await getDocs(foodColl);

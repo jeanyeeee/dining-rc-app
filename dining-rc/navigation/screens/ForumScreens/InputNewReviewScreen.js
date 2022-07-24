@@ -67,7 +67,7 @@ export default function InputNewReviewScreen({route, navigation }) {
         console.log("Food Name ", food.foodName);
         //The date Aug 30 is set so that the food item will appear first!
         await addDoc(collection(db, "StudentRating"), {
-          Date: Timestamp.fromDate(new Date("August 30, 2022")),
+          Date: Timestamp.fromDate(new Date("August 31, 2022")),
           Feedback: Review,
           "Food ID": food.foodID,
           "Food Name": food.foodName,

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native"
 import { collection, getDocs , getDoc, query, where} from 'firebase/firestore';
 import {db} from '../firebase';
 import React, {useEffect, useState} from 'react';
+import ShowStars from "../components/ShowStars";
 
 
 //Using the array, function get average rating
@@ -36,7 +37,7 @@ const GetAveRating = ({foodID}) => {
 
     return(
         <View>
-            <Text>Average Rating: {average.toFixed(2)}</Text>
+            <ShowStars rating= {average.toFixed(2)}/>
         </View>    
     )
 
