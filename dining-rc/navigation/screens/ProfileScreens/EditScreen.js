@@ -1,29 +1,64 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import { ButtonComponent, InputField, ErrorMessage } from '../../../components';
 import { getAuth } from 'firebase/auth';
 import { db } from '../../../firebase';
-import { setDoc, collection, doc, FieldValue, Timestamp } from 'firebase/firestore';
+import { setDoc, doc, Timestamp } from 'firebase/firestore';
 
 //TODO: integrate authentication before add new review
 //TODO: handle error, update database, after submit redirect to the forum (and the forum must show the newest update)
 //image, stall name, food name, review, rating, date, user into the database
 export default function EditScreen({route, navigation }) {
   const [Review, setReview] = useState('');
-  const [Rating, setRating] = useState(0);
   const [loginError, setLoginError] = useState('');
+
+  const [defaultRating, setDefaultRating ] = useState(2);
+  const [maxRating, setMaxRating] = useState([1,2,3,4,5]);
+
+  const fullStar = require("../../../images/star_filled.png"); 
+  const noStar = require("../../../images/star_corner.png");
+
 
   const food = route.params // contain: stallName, foodName, foodID, foodImage
   const auth = getAuth();
 
+  const CustomRatingBar = () =>{
+    return(
+        <View style={styles.customRatingBar}>
+            {
+                maxRating.map((item, key) => {
+                    return(
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        key= {item}
+                        onPress = {() => setDefaultRating(item)}  
+                        >
+                        
+                        <Image
+                        style = {styles.starImage}
+                        source = {
+                            item <= defaultRating
+                            ? fullStar
+                            : noStar
+                        }
+                        />
+
+                      </TouchableOpacity>
+                    )
+                })
+            }
+        </View>
+    )
+}
+
   const onSubmit = async () => {
     try {
-      if (Rating !== '' && Review !== '') {
+      if (defaultRating !== 0 && Review !== '') {
         //await set new review
         //right now: after press submit, does nothing
-        console.log("rating: ", Rating);
+        console.log("rating: ", defaultRating);
         console.log("review: ", Review);
         console.log("Food Name ", food.foodName);
         console.log("Stall Name ", food.stallName);
@@ -34,7 +69,7 @@ export default function EditScreen({route, navigation }) {
           "Food Name": food.foodName,
           "Stall Name": food.stallName,
           "Image": food.foodImage,
-          Rating: parseInt(Rating),
+          Rating: defaultRating,
           userID: auth.currentUser.uid
         });
         navigation.navigate("ProfileDisplay");
@@ -58,21 +93,9 @@ export default function EditScreen({route, navigation }) {
     <View style={styles.container}>
       <StatusBar style='dark-content' />
       <Text style={styles.title}>Tell us what you think of {food.foodName}</Text>
-      <InputField
-        inputStyle={{
-          fontSize: 14
-        }}
-        containerStyle={{
-          backgroundColor: '#fff',
-          marginBottom: 20
-        }}
-        placeholder='Rate this dish'
-        autoCapitalize='none'
-        keyboardType='number-pad' //need to limit to 5 or handle error when input > 5
-        autoFocus={true}
-        value={Rating}
-        onChangeText={text => setRating(text)}
-      />
+      <View>
+      <CustomRatingBar />
+    </View>
       <InputField
         inputStyle={{
           fontSize: 14
@@ -144,5 +167,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#2A3037',
     paddingBottom: 20,
-  }
+  },
+  customRatingBar: {
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+},
+starImage: {
+    width: 40,
+    height: 40,
+    resizeMode: "cover",
+},
+
+buttonStyle: {
+    justifyContent:"center",
+    alignItems:"center",
+}
 });

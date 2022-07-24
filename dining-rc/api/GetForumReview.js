@@ -108,7 +108,9 @@ const GetForumReview = ({navigation}) => {//input: today time
                         {/*From Dining Food */}
                         <GetForumInfo foodID = {item["info"]["Food ID"]} />
                         {/* From StudentRating Database */}
-                        <GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/>
+                        {/* TODO: change the rating to stars!!! */}
+                        <Text style = {styles.itemText}>Rating: {item["info"]["Rating"]}</Text>
+                        {/*<GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/> */}
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
                 </View> 
@@ -144,5 +146,6 @@ const styles = StyleSheet.create({
             flexDirection: "column",
             marginLeft: 20, 
             marginRight: 90, 
-        }
+        },
+
     })

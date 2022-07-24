@@ -40,19 +40,13 @@ const StarRatingComponent = () => {
 }
   return (
     <View>
-      <Text>StarRatingComponent</Text>
       {/*Show the star rating */}
       <CustomRatingBar />
     {/*Show the text*/}
       <Text>
-        {defaultRating + '/' + maxRating.length}
+        {/* {defaultRating + '/' + maxRating.length} */}
       </Text>
     {/*Change this to changing default rating in the database instead */}
-
-      <TouchableOpacity 
-        activeOpacity={0.7}
-        onPress = {() => alert(defaultRating)}
-      ><Text>Submit Here</Text></TouchableOpacity>
     </View>
   )
 }
@@ -63,7 +57,7 @@ const styles = StyleSheet.create({
     customRatingBar: {
         justifyContent: "center",
         flexDirection: "row",
-        marginTop: 30,
+        marginTop: 20,
     },
     starImage: {
         width: 40,
