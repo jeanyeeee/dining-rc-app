@@ -12,6 +12,7 @@ const DishComponent = ({id, item, navigation}) => {
     const [review, setReview] = useState([]);
     const dishRef = id;
     const reviewColl = collection(db, "StudentRating")
+    //only get if food ref is == and the average rating is > 3
     const f1 = query(reviewColl, where("Food Ref ID", "==", dishRef));
 
     useEffect(() => {

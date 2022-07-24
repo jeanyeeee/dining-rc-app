@@ -1,5 +1,5 @@
 import { async } from '@firebase/util';
-import { doc, getFirestore, collection, getDocs , getDoc, query, where, orderBy} from 'firebase/firestore';
+import {collection, getDocs , query,orderBy, startAt, endBefore, Timestamp, where} from 'firebase/firestore';
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
@@ -10,11 +10,18 @@ import DishComponent from '../components/DishComponent';
 
 //TODO: Need to include ratings too
 //TODO: onPress -> go to rating page w only the food item
-const GetDishList = (navigation) => {
+const GetDishList = ({navigation, currDate, nextDate}) => {
+    //console.log("Curr Date" , currDate.toDateString())
+    //console.log("Next Date" , nextDate.toDateString())
+
     const [food, setFood] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
     const foodColl = collection(db, "DiningFood")
-    const f1 = query(foodColl, orderBy("Average Rating", "desc"));
+    const f1 = query(foodColl, 
+    orderBy("Date", "asc"),
+    orderBy("Average Rating", "desc"),
+    startAt(new Timestamp.fromDate(currDate)),
+    endBefore(new Timestamp.fromDate(nextDate)));
 
     const onRefresh = async () => {
         setIsFetching(true);

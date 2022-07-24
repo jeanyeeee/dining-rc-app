@@ -57,7 +57,7 @@ export default function EditScreen({route, navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style='dark-content' />
-      <Text style={styles.title}>Tell us what you think of this dish</Text>
+      <Text style={styles.title}>Tell us what you think of {food.foodName}</Text>
       <InputField
         inputStyle={{
           fontSize: 14

@@ -80,13 +80,18 @@ export default function HomeScreen({route, navigation}) {
       </View>
       {/*For Tabs*/}
       {/*Uncomment below line for the update and desc home screen*/}
-      {/*dish? <GetDishList navigation = {navigation} /> : <GetStalls/>*/}
+      {dish? <GetDishList navigation = {navigation}
+      currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
+      nextDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)}
+       /> : <GetStalls/>}
+      {/*
       {dish? <GetData 
       navigation = {navigation} 
       currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
       nextDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)}
-      /> : <GetStalls/>}
+      /> : <GetStalls/>}*/}
       </View>
+      
 
   ); 
 }

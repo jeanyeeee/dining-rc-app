@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { View, ActivityIndicator } from 'react-native';
 
 import { AuthenticatedUserContext } from '../AuthenticatedUserProvider';
@@ -10,7 +9,7 @@ import AuthForumStack from './AuthForumStack';
 
 const auth = getAuth();
 
-export default function ForumNavigator() {
+export default function ForumNavigator(navigation) {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
 
