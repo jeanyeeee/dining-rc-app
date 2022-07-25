@@ -3,8 +3,8 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, KeyboardAvoidingView} from 'react-native';
 import { ButtonComponent, InputField, ErrorMessage } from '../../components';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
+import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+//for committing
 const auth = getAuth();
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
