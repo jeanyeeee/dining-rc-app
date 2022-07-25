@@ -23,10 +23,16 @@ const GetDishList = ({navigation, currDate, nextDate}) => {
     startAt(new Timestamp.fromDate(currDate)),
     endBefore(new Timestamp.fromDate(nextDate)));
 
+    //start + 82800 = 12:00
+    // const f1 = query(foodColl, 
+    //     orderBy("Date", "asc"),
+    //     orderBy("Average Rating", "desc"),
+    //     startAt(new Timestamp.fromDate(currDate)),
+    //     endBefore(new Timestamp.fromDate(nextDate)));
+
     const onRefresh = async () => {
         setIsFetching(true);
-        await sleep(2000);
-        setIsFetching(false);
+        setTimeout(() => {setIsFetching(false)}, 2000);
       };
 
     useEffect(() => {

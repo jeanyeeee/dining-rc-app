@@ -83,7 +83,9 @@ export default function HomeScreen({route, navigation}) {
       {dish? <GetDishList navigation = {navigation}
       currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
       nextDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)}
-       /> : <GetStalls/>}
+       /> : <GetStalls navigation = {navigation}
+       currDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate())}
+       nextDate = {new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)}/>}
       {/*
       {dish? <GetData 
       navigation = {navigation} 

@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {InputField, ButtonComponent, ErrorMessage } from '../../components'
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -34,7 +34,39 @@ export default function SignupScreen({ navigation }) {
           const user = userCredential.user;
           console.log(user.email);
 
-        })
+        }).catch(
+          error => {
+            if (error.code === 'auth/email-already-in-use') { // for sign up
+              console.log('That email address is already in use!');
+              setSignupError('Email address is already in use');
+            }
+        
+            if (error.code === 'auth/invalid-email') { //email input not correct form
+              console.log('That email address is invalid!');
+              setSignupError('Email address is invalid');
+            }
+
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') { //invalid user
+              console.log('Invalid email or password');
+              setSignupError('Invalid email or password');
+            }
+
+            if (error.code === 'auth/weak-password') { //weak password
+              console.log('Password should be at least 6 characters');
+              setSignupError('Password should be at least 6 characters');
+            }
+        
+            console.error(error);
+          }
+        )
+      } else {
+        if (email === '') {
+          console.log('Please enter your email');
+          setSignupError('Please enter your email');
+        } else {
+          console.log('Please enter your password');
+          setSignupError('Please enter your password');
+        }
       }
     } catch (error) {
       setSignupError(error.message);

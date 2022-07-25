@@ -1,17 +1,27 @@
-import { doc, getFirestore, collection, getDocs , getDoc, query, where} from 'firebase/firestore';
+import { doc, getFirestore, collection, getDocs , startAt, endBefore, Timestamp, query, where, orderBy} from 'firebase/firestore';
 import {db} from '../firebase';
 import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import GetImage from '../ui/ImagePicker';
-import GetAveRating from '../ui/GetAveRating';
+import DishComponent from '../components/DishComponent';
 //TODO: Keep as follows, need to group by stall name in flatlist
 
-const GetStalls = () => {
+const GetStalls = ({navigation, currDate, nextDate}) => {
     const [food, setFood] = useState([]);
-    const foodColl = collection(db, "DiningFood");
-    useEffect(() => {
-        async function fetchData() {
-            const foodSnapshot = await getDocs(foodColl);
+    const [isFetching, setIsFetching] = useState(false);
+    const foodColl = collection(db, "DiningFood")
+    const f1 = query(foodColl, 
+    orderBy("Date", "asc"),
+    startAt(new Timestamp.fromDate(currDate)),
+    endBefore(new Timestamp.fromDate(nextDate)));
+
+    const onRefresh = async () => {
+        setIsFetching(true);
+        setTimeout(() => {setIsFetching(false)}, 2000);
+      };
+      
+  useEffect(() => {
+         function fetchData() {
+            const foodSnapshot = await getDocs(f1);
             const foods = [];
             //for each food in the list
             const foodList = foodSnapshot.docs.map(doc => {
@@ -27,23 +37,17 @@ const GetStalls = () => {
         setFood(foods)
     }
     fetchData();
-}, [])    
+}, [f1])    
 
     return(
         <FlatList 
         style= {{height: '100%'}}
         data = {food}
+        onRefresh={onRefresh}
+        refreshing={isFetching}
         numColumns = {1}
         renderItem = {({item}) => (
-            <Pressable style = {styles.pressable}>
-                <View style = {styles.inner}>
-                <GetImage style= {styles.image} name = {item["info"]["Image"]}/>
-                <View style = {styles.innerText}>
-                    <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
-                    <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
-                </View>
-                </View> 
-            </Pressable> 
+            <DishComponent id = {item["id"]} item = {item} navigation = {navigation}/>
         )} />
     )
 }

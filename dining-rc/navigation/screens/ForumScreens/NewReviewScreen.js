@@ -34,14 +34,38 @@ export default function NewReviewScreen({ navigation }) {
     fetchData();
 }, [])    
 
+const goBackToProfile = () => {
+    navigation.navigate("AuthForum");
+ }
+
   //create a dropdown of the food that date menu served
   //using react-native-material-dropdown or 
   //just a new page
   //choosing the dish -> 
 
   return(
-    <View style = {{backgroundColor: "white"}}>
-        <Text style = {styles.topText}>Choose A Dish</Text>
+    <View style = {{backgroundColor: "white"}} flexDirection = {"column"} flex = {"1"}>
+        <View flexDirection = {"row"} flex = {"1"}>
+            <View style= {styles.ButtonContainer}>
+                <ButtonComponent
+                    style = {styles.button}
+                    onPress={goBackToProfile}
+                    backgroundColor='#0B735F'
+                    title='Go Back'
+                    
+                    tileColor='#fff'
+                    titleSize={15}
+                    containerStyle={{
+                        top: 15,
+                        left: 10
+                    }}
+                    />
+            </View>
+            <View>
+                <Text style = {styles.topText}>Choose A Dish</Text>
+            </View>
+        </View>
+        <View flex = {"8"}>
         <FlatList 
             style= {{height: '100%'}}
             data = {food}
@@ -68,6 +92,8 @@ export default function NewReviewScreen({ navigation }) {
                         </View> 
                 </Pressable> 
             )} />
+        </View>
+        
     </View>
 )
 }
@@ -107,6 +133,11 @@ image: {
     height: 70,
     borderRadius: 35,
 },
+ButtonContainer: {
+    alignItems: 'flex-end',
+    paddingRight: 55,
+    backgroundColor: '#fff',
+  },
 innerText: {
     flexDirection: "column",
     marginLeft: 20, 
