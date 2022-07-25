@@ -19,8 +19,8 @@ const GetStalls = ({navigation, currDate, nextDate}) => {
         setTimeout(() => {setIsFetching(false)}, 2000);
       };
       
-  useEffect(() => {
-         function fetchData() {
+  useEffect( () => {
+         async function fetchData() {
             const foodSnapshot = await getDocs(f1);
             const foods = [];
             //for each food in the list

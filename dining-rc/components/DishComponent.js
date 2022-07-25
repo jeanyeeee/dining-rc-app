@@ -60,7 +60,8 @@ if (isNaN(average)) {
                     <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                     <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     {update(0)}
-                    <Text style= {styles.itemText}>Average Rating: 0</Text>
+                    <ShowStars rating={0} />
+
                 </View> 
             </View> 
         </Pressable> 
