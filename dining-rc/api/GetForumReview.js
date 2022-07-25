@@ -5,6 +5,7 @@ import {View, Text, FlatList, StyleSheet, Pressable, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetAveRating from '../ui/GetAveRating';
 import GetImage from '../ui/ImagePicker';
+import ShowStars from '../components/ShowStars';
 //TODO: Take image from DiningFood instead!!!!
 const GetForumInfo = ({foodID}) => {
     //get the image and food from the DiningFood
@@ -108,9 +109,7 @@ const GetForumReview = ({navigation}) => {//input: today time
                         {/*From Dining Food */}
                         <GetForumInfo foodID = {item["info"]["Food ID"]} />
                         {/* From StudentRating Database */}
-                        {/* TODO: change the rating to stars!!! */}
-                        <Text style = {styles.itemText}>Rating: {item["info"]["Rating"]}</Text>
-                        {/*<GetAveRating style= {styles.itemText} foodID={item["info"]["Food ID"]}/> */}
+                        <ShowStars rating= {item["info"]["Rating"]}/>
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View> 
                 </View> 

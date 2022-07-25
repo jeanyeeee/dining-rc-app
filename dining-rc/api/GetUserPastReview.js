@@ -6,7 +6,7 @@ import React, {useState, useEffect} from 'react';
 import GetImage from '../ui/ImagePicker';
 import { getAuth } from 'firebase/auth';
 import { ButtonComponent, IconButton } from '../components';
-//TODO: Take image from DiningFood instead!!!!
+import ShowStars from '../components/ShowStars';
 
 //TODO: query according to the date of today
 const GetUserReview = ({navigation}) => {//input: today time
@@ -80,7 +80,7 @@ const GetUserReview = ({navigation}) => {//input: today time
                         <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
 
                         {/* From StudentRating Database */}
-                        <Text style= {styles.itemText}>Rating: {item["info"]["Rating"]}</Text>
+                        <ShowStars rating= {item["info"]["Rating"]} />
                         <Text style= {styles.itemText}>{item["info"]["Feedback"]}</Text>
                     </View>
                     <View flex = {"1"} flexDirection = {"column"}>

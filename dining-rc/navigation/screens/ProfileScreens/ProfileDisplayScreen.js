@@ -16,6 +16,7 @@ const ProfileDisplayScreen  = ({navigation}) => {
    const handleSignOut = async () => {
     try {
       await auth.signOut();
+      navigation.navigate("HelloSignIn");
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +36,7 @@ const ProfileDisplayScreen  = ({navigation}) => {
               <GetUserReview navigation={navigation}
               />
             </View>
-            <View style= {styles.OptionOne}>
+            <View style= {styles.bottomButton}>
               <ButtonComponent
               style = {styles.button}
               onPress={handleSignOut}
@@ -59,7 +60,7 @@ export default ProfileDisplayScreen;
 const styles = StyleSheet.create({
   container: {
   flex: 1,
-  backgroundColor: "#fff"
+  backgroundColor: "#fff",
   },
   imageContainer: {
     flex: 2,
@@ -79,19 +80,18 @@ const styles = StyleSheet.create({
   userEmail: {
     fontSize: 20,
     top: 22,
-    fontFamily: "Cochin"
+
   },
   userReview: {
     fontSize: 20,
     top: 22,
-    fontFamily: "Cochin",
     paddingRight: 250,
     top: 35
   },
   OptionOne: {
     justifyContent:"flex-end",
     flex: 1,
-    bottom: 0
+  
   },
   Review: {
     justifyContent:"center",

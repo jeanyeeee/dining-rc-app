@@ -5,6 +5,7 @@ import {View, Text, FlatList, StyleSheet, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import GetImage from '../ui/ImagePicker';
 import * as RootNavigation from '../navigation/RootNavigation';
+import ShowStars from './ShowStars';
 
 //params: food Ref ID
 const DishComponent = ({id, item, navigation}) => {
@@ -78,7 +79,8 @@ if (isNaN(average)) {
                     <Text style= {styles.heading}>{item["info"]["Stall Name"]}</Text>
                     <Text style= {styles.itemText}>{item["info"]["Food Name"]}</Text>
                     {update(average.toFixed(2))}
-                    <Text style= {styles.itemText}>Average Rating: {average.toFixed(2)}</Text>
+                    <ShowStars rating={average} />
+                    {/* <Text style= {styles.itemText}>Average Rating: {average.toFixed(2)}</Text> */}
                 </View> 
             </View> 
         </Pressable> 
