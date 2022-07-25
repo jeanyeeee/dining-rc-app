@@ -15,7 +15,7 @@ import { connectStorageEmulator } from 'firebase/storage';
 export default function InputNewReviewScreen({route, navigation }) {
   const [Review, setReview] = useState('');
   //const [Rating, setRating] = useState(0);
-  const [loginError, setLoginError] = useState('');
+  const [reviewError, setReviewError] = useState('');
 
   const food = route.params // contain: stallName, foodName, foodID, foodImage
   const auth = getAuth();
@@ -78,12 +78,22 @@ export default function InputNewReviewScreen({route, navigation }) {
           userID: auth.currentUser.uid
         });
         navigation.navigate("AuthForum");
+        } else {
+          if (defaultRating === 0) {
+            setReviewError("Minimum rating is 1, please enter new rating")
+          } else if (Review === "") {
+            setReviewError("Please enter your review")
+          }
         }      
   } catch (error) {
       //setLoginError(error.message);
       console.log("error: ", error.message);
     }
   };
+
+  const cancel = () => {
+    navigation.navigate("AuthForum");
+ }
 
   //create a dropdown of the food that date menu served
   //using react-native-material-dropdown
@@ -128,19 +138,38 @@ export default function InputNewReviewScreen({route, navigation }) {
         onChangeText={text => setReview(text)}
       />
       
-      {loginError ? <ErrorMessage error={loginError} visible={true} /> : null}
-
-      <ButtonComponent
-        onPress={onSubmit}
-        backgroundColor='#0B735F'
-        title='Submit'
+      {reviewError ? <ErrorMessage error={reviewError} visible={true} /> : null}
+      <View flexDirection = {"row"}>
+        <View flex = {1}>
+            <ButtonComponent
+            onPress={onSubmit}
+            backgroundColor='#0B735F'
+            title='Submit'
+            
+            tileColor='#fff'
+            titleSize={20}
+            containerStyle={{
+              top: 15
+            }}
+          />
+        </View>
+        <View flex = {1}>
+            <ButtonComponent
+              style = {styles.button}
+              onPress={cancel}
+              backgroundColor='#0B735F'
+              title='Cancel'
+              
+              tileColor='#fff'
+              titleSize={20}
+              containerStyle={{
+                top: 15
+              }}
+            />
+        </View>
         
-        tileColor='#fff'
-        titleSize={20}
-        containerStyle={{
-          marginBottom: 24
-        }}
-      />
+      </View>
+      
     </View>
   );
 }

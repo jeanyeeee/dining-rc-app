@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, Button, KeyboardAvoidingView, Alert} from 'react-native';
 import { ButtonComponent, InputField, ErrorMessage } from '../../components';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -31,7 +31,34 @@ export default function LoginScreen({ navigation }) {
           // Signed in 
           const user = userCredential.user;
           console.log(user.email);
-        })}
+        }).catch(
+          error => {
+            if (error.code === 'auth/email-already-in-use') { // for sign up
+              console.log('That email address is already in use!');
+              setLoginError('Email address is already in use');
+            }
+        
+            if (error.code === 'auth/invalid-email') { //email input not correct form
+              console.log('That email address is invalid!');
+              setLoginError('Email address is invalid');
+            }
+
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') { //invalid user
+              console.log('Invalid email or password');
+              setLoginError('Invalid email or password');
+            }
+        
+            console.error(error);
+          }
+        )} else {
+          if (email === '') {
+            console.log('Please enter your email');
+            setLoginError('Please enter your email');
+          } else {
+            console.log('Please enter your password');
+            setLoginError('Please enter your password');
+          }
+        }
   } catch (error) {
       setLoginError(error.message);
     }

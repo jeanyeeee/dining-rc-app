@@ -11,14 +11,7 @@ import { ButtonComponent, IconButton } from '../components';
 //TODO: query according to the date of today
 const GetUserReview = ({navigation}) => {//input: today time
     //default state for debugging only
-    const [rating, setRating] = useState([{
-        id: 123,
-        info: {
-            Date: Timestamp.now(),
-        "Feedback": "Good",
-        "Rating": 5
-        }
-    }]);
+    const [rating, setRating] = useState([]);
     const ratingColl = collection(db, "StudentRating");
     const auth = getAuth();
     const userID = auth.currentUser.uid;
